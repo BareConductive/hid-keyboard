@@ -81,6 +81,9 @@ void setup(){
     while(1);
   }
   MPR121.setInterruptPin(MPR121_INT);
+  MPR121.setTouchThreshold(40);
+  MPR121.setReleaseThreshold(20);
+
   MPR121.updateAll();
   
   Keyboard.begin();
