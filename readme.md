@@ -1,8 +1,8 @@
 [![Bare Conductive](https://www.dropbox.com/s/p0p71yid2t8tenp/LOGO_256x106.png?dl=1)](http://www.bareconductive.com/)
 
-# Bare Conductive HID keyboard Demo Code
+# Bare Conductive HID Keyboard Demo Code
 
-Simple proximity-triggered MP3 code for the [Bare Conductive Touch Board](http://www.bareconductive.com/shop/touch-board/). Touch electrode 0, **TRACK000.MP3** plays from the micro SD card. Touch electrode 1, **TRACK001.MP3** plays from the micro SD card, and so on.  This is a small evolution of the [Touch MP3](https://github.com/BareConductive/touch-mp3) code that ships with the [Touch Board](http://www.bareconductive.com/shop/touch-board/).
+Simple touch-to-keyboard-press code for the [Bare Conductive Touch Board](www.bareconductive.com/store/touch-board). Touching electrode 0 results in a **J** keypress, electrode 1 maps to **U**, electrode 2 maps to  **H**, then **Y**, **G**, **T**, **F**, **D**, **E**, **S**, **W** and **A** respectively. Alternative mappings are possible by modifying the code.
 
 ## Requirements
 * [Arduino](http://arduino.cc/en/Main/Software) 1.5.6 or later
