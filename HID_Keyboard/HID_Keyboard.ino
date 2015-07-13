@@ -100,13 +100,14 @@ void loop(){
       for(int i=firstPin; i<=lastPin; i++){
         if(MPR121.isNewTouch(i)){
           // if we have a new touch on this electrode...
-          // turn the onboard LED on, and press (and release)
+          // turn the onboard LED on, and press
           // the appropriate key on the "keyboard" output
           digitalWrite(LED_BUILTIN, HIGH);
           Keyboard.press(keyMap[i]);
-          Keyboard.release(keyMap[i]);
         } else if(MPR121.isNewRelease(i)){
-          // if we have a new release, turn the onboard LED off
+          // if we have a new release, release the appropriate key
+          // and turn the onboard LED off
+          Keyboard.release(keyMap[i]);
           digitalWrite(LED_BUILTIN, LOW);
         }
       }
