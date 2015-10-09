@@ -34,6 +34,9 @@
 const char keyMap[12] = {'J', 'U', 'H', 'Y', 'G', 'T', 'F', 'D', 'E', 'S', 'W', 'A'};
 //const char keyMap[12] = {KEY_LEFT_ARROW, KEY_RIGHT_ARROW, KEY_UP_ARROW, KEY_DOWN_ARROW, ' ', KEY_ESC, KEY_F1, KEY_F2, KEY_F3, KEY_F4, KEY_PAGE_UP, KEY_PAGE_DOWN};
 
+#define holdKey true  // set this to false if you want to have a single quick keystroke
+                      // true means the key is pressed and released when you press and release the electrode respectively
+
 // touch behaviour definitions
 #define firstPin 0
 #define lastPin 11
@@ -104,10 +107,12 @@ void loop(){
           // the appropriate key on the "keyboard" output
           digitalWrite(LED_BUILTIN, HIGH);
           Keyboard.press(keyMap[i]);
+          // if we don't want to hold the key, immediately release it
+          if(!holdKey) Keyboard.release(keyMap[i]);
         } else if(MPR121.isNewRelease(i)){
-          // if we have a new release, release the appropriate key
-          // and turn the onboard LED off
-          Keyboard.release(keyMap[i]);
+          // if we have a new release and we were holding a key, release it 
+          if(holdKey) Keyboard.release(keyMap[i]);
+          // turn the onboard LED off
           digitalWrite(LED_BUILTIN, LOW);
         }
       }
