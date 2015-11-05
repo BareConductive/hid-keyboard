@@ -1,11 +1,12 @@
-[![Bare Conductive](https://www.dropbox.com/s/7qmvpvst3kal3qv/LOGO_256x106.png?dl=1)](http://www.bareconductive.com/)
+[![Bare Conductive](http://bareconductive.com/assets/images/LOGO_256x106.png)](http://www.bareconductive.com/)
 
 # Bare Conductive HID Keyboard Demo Code
 
 Simple touch-to-keyboard-press code for the [Bare Conductive Touch Board](www.bareconductive.com/store/touch-board). Touching electrode 0 results in a **J** keypress, electrode 1 maps to **U**, electrode 2 maps to  **H**, then **Y**, **G**, **T**, **F**, **D**, **E**, **S**, **W** and **A** respectively. Alternative mappings are possible by modifying the code.
 
 ## Requirements
-* [Arduino](http://arduino.cc/en/Main/Software) 1.5.6 or later
+
+* [Arduino](http://arduino.cc/en/Main/Software) 1.6.6 or later
 
 * Arduino's instructions for installing libraries are available [here](http://arduino.cc/en/Guide/Libraries)
 	

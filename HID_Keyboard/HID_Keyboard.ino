@@ -20,11 +20,16 @@
 
 *******************************************************************************/
 
+// compiler error handling
+#include "Compiler_Errors.h"
+
 // touch  includes
 #include <MPR121.h>
 #include <Wire.h>
 #define MPR121_ADDR 0x5C
 #define MPR121_INT 4
+
+#include <Keyboard.h>
 
 // these keys map from E0 to E11 on the Touch Board - in GarageBand they map to a 
 // full chromatic scale (like a piano) from C to C - you can replace them with any
