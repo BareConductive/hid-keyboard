@@ -5,14 +5,7 @@
 Simple touch-to-keyboard-press code for the [Bare Conductive Touch Board](www.bareconductive.com/store/touch-board). Touching electrode 0 results in a **J** keypress, electrode 1 maps to **U**, electrode 2 maps to  **H**, then **Y**, **G**, **T**, **F**, **D**, **E**, **S**, **W** and **A** respectively. Alternative mappings are possible by modifying the code.
 
 ## Requirements
-
-* [Arduino](http://arduino.cc/en/Main/Software) 1.6.6 or later
-
-* Arduino's instructions for installing libraries are available [here](http://arduino.cc/en/Guide/Libraries)
-	
-* [Bare Conductive MPR121 library](https://github.com/bareconductive/mpr121) (zip file download [here](https://github.com/bareconductive/mpr121/archive/public.zip))
-
-* [Bare Conductive Arduino Hardware Plugins](https://github.com/bareconductive/bare-conductive-arduino) (zip file download [here](https://github.com/bareconductive/bare-conductive-arduino/archive/public.zip)) - instructions on installing this hardware plugin folder are available [here](https://github.com/bareconductive/bare-conductive-arduino).
+* You should make sure that you have followed our [Setting up Arduino with your Touch Board](http://www.bareconductive.com/make/setting-up-arduino-with-your-touch-board/) tutorial before using this (or any other) of our code examples
 
 
 ## Install
