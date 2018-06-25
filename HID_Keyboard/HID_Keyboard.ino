@@ -70,8 +70,6 @@ void setup(){
   //while (!Serial) ; {} //uncomment when using the serial monitor 
   Serial.println("Bare Conductive HID keyboard demo");
 
-  Wire.begin();
-
   if(!MPR121.begin(MPR121_ADDR)){ 
     Serial.println("error setting up MPR121");  
     switch(MPR121.getError()){
