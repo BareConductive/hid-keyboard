@@ -42,33 +42,26 @@
 // keyboard includes
 #include <Keyboard.h>
 
+// keyboard variables
+char key;
+
+// keyboard behaviour constants
+const bool HOLD_KEY = true;  // set this to false if you want to have a single quick keystroke, true means the key is pressed and released when you press and release the electrode respectively
+const char KEY_MAP[12] = {'J', 'U', 'H', 'Y', 'G', 'T', 'F', 'D', 'E', 'S', 'W', 'A'};
+// const char KEY_MAP[12] = {KEY_LEFT_ARROW, KEY_RIGHT_ARROW, KEY_UP_ARROW, KEY_DOWN_ARROW, ' ', KEY_ESC, KEY_F1, KEY_F2, KEY_F3, KEY_F4, KEY_PAGE_UP, KEY_PAGE_DOWN};  // more keys at http://arduino.cc/en/Reference/KeyboardModifiers
+// const char KEY_MAP[12] = {'8', '3', '0', '1', '2', '4', '7', '6', '5', '9', '9', '9'};  // for memory game
+
 // touch constants
 const uint32_t BAUD_RATE = 115200;
 const uint8_t MPR121_ADDR = 0x5C;
 const uint8_t MPR121_INT = 4;
-
-// keyboard variables
-const bool holdKey = true;  // set this to false if you want to have a single quick keystroke
-                            // true means the key is pressed and released when you press and release the electrode respectively
-const char keyMap[12] = {'J', 'U', 'H', 'Y', 'G', 'T', 'F', 'D', 'E', 'S', 'W', 'A'};
-// const char keyMap[12] = {'8', '3', '0', '1', '2', '4', '7', '6', '5', '9', '9', '9'};  // for memory game
-// const char keyMap[12] = {KEY_LEFT_ARROW, KEY_RIGHT_ARROW, KEY_UP_ARROW, KEY_DOWN_ARROW, ' ', KEY_ESC, KEY_F1, KEY_F2, KEY_F3, KEY_F4, KEY_PAGE_UP, KEY_PAGE_DOWN};
-// more keys at http://arduino.cc/en/Reference/KeyboardModifiers
-
-// serial monitor behaviour constants
-const bool WAIT_FOR_SERIAL = false;
 
 // MPR121 datastream behaviour constants
 const bool MPR121_DATASTREAM_ENABLE = false;
 
 void setup() {
   Serial.begin(BAUD_RATE);
-
   pinMode(LED_BUILTIN, OUTPUT);
-
-  if (WAIT_FOR_SERIAL) {
-    while (!Serial);
-  }
 
   if (!MPR121.begin(MPR121_ADDR)) {
     Serial.println("error setting up MPR121");
@@ -110,15 +103,13 @@ void setup() {
 
   MPR121.setFFI(FFI_10);
   MPR121.setSFI(SFI_10);
-
-  pinMode(LED_BUILTIN, OUTPUT);
+  MPR121.setGlobalCDT(CDT_4US);  // reasonable for larger capacitances
+  
   digitalWrite(LED_BUILTIN, HIGH);  // switch on user LED while auto calibrating electrodes
-
-  MPR121.setGlobalCDT(CDT_4US);  // reasonable for larger capacitances at the end of long cables when using Interactive Wall Kit
-  MPR121.autoSetElectrodeCDC();  // autoset all electrode settings
-
+  delay(1000);
+  MPR121.autoSetElectrodes();  // autoset all electrode settings
   digitalWrite(LED_BUILTIN, LOW);
-
+  
   Keyboard.begin();
 }
 
@@ -126,19 +117,21 @@ void loop() {
   MPR121.updateAll();
 
   for (int i=0; i < 12; i++) {  // check which electrodes were pressed
+    key = KEY_MAP[i];
+    
     if (MPR121.isNewTouch(i)) {
       digitalWrite(LED_BUILTIN, HIGH);
-      Keyboard.press(keyMap[i]);  // press the appropriate key on the "keyboard" output
+      Keyboard.press(key);  // press the appropriate key on the "keyboard" output
 
-      if (!holdKey) {
-        Keyboard.release(keyMap[i]);  // if we don't want to hold the key, immediately release it
+      if (!HOLD_KEY) {
+        Keyboard.release(key);  // if we don't want to hold the key, immediately release it
       }
     } else {
       if (MPR121.isNewRelease(i)) {
         digitalWrite(LED_BUILTIN, LOW);
 
-        if (holdKey) {
-          Keyboard.release(keyMap[i]);  // if we have a new release and we were holding a key, release it
+        if (HOLD_KEY) {
+          Keyboard.release(key);  // if we have a new release and we were holding a key, release it
         }
       }
     }
